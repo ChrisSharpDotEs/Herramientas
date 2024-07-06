@@ -48,4 +48,16 @@ urls.forEach((url, index) => {
     .catch(error => console.log(error));
 });
 
-window.addEventListener('resize', () => sidebar.style.minHeight = document.body.scrollHeight + 'px');
+window.addEventListener('resize', () =>  {
+    if(document.body.scrollHeight <= window.innerHeight){
+        return sidebar.style.minHeight = window.innerHeight + 'px'; 
+    } else {
+        return sidebar.style.minHeight = document.body.scrollHeight + 'px';
+    }
+});
+
+if(document.body.scrollHeight <= window.innerHeight){
+    sidebar.style.minHeight = window.innerHeight + 'px'; 
+} else {
+    sidebar.style.minHeight = document.body.scrollHeight + 'px';
+}
