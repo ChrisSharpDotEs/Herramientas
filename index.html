@@ -40,40 +40,14 @@
   </style>
 </head>
 
-<body data-bs-theme="dark">
-  <header>
-    <nav class="navbar navbar-expand-sm p-4">
-      <div class="container">
-        <a class="navbar-brand" href="#">Mis herramientas</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-          data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html" aria-current="page">Inicio
-                <span class="visually-hidden">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="converter.html">Conversor</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="snippets.html">Snippets</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+<body data-bs-theme="">
   <main class="row">
     <aside class="col-md-3 col-lg-2">
-      <div class="sidebar border border-right p-0 bg-body-tertiary">
+      <div id="sidebar" class="sidebar border border-right p-0 bg-body-tertiary">
         <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="2" id="sidebarMenu"
           aria-labelledby="sidebarMenuLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+            <a class="navbar-brand" href="#">Mis herramientas</a>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
               aria-label="Close"></button>
           </div>
@@ -83,90 +57,36 @@
                 <h2 class="accordion-header" id="headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
-                    Accordion Item #1
+                    Resultados
                   </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                   data-bs-parent="#accordionExample">
                   <div class="accordion-body">
-                    This is the first item's accordion body.
+                    <ul class="nav flex-column">
+                      <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="#">
+                          <i class="bi bi-cart fs-3"></i>
+                          Products
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="#">
+                          <i class="bi bi-people fs-3"></i>
+                          Customers
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="#">
+                          <i class="bi bi-graph-up fs-3"></i>
+                          Reports
+                        </a>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
-
             </div>
-
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
-                  <i class="bi bi-house-fill fs-3"></i>
-                  Dashboard
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-file-earmark fs-3"></i>
-                  Orders
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-cart fs-3"></i>
-                  Products
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-people fs-3"></i>
-                  Customers
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-graph-up fs-3"></i>
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">L
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-puzzle fs-3"></i>
-                  Integrations
-                </a>
-              </li>
-            </ul>
-            <h6
-              class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-              <span>Saved reports</span>
-              <a class="link-secondary" href="#" aria-label="Add a new report">
-                <i class="bi bi-plus-circle fs-3"></i>
-              </a>
-            </h6>
-            <ul class="nav flex-column mb-auto">
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-file-earmark-text fs-3"></i>
-                  Current month
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-file-earmark-text fs-3"></i>
-                  Last quarter
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-file-earmark-text fs-3"></i>
-                  Social engagement
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-file-earmark-text fs-3"></i>
-                  Year-end sale
-                </a>
-              </li>
-            </ul>
             <hr class="my-3">
             <ul class="nav flex-column mb-auto">
               <li class="nav-item">
@@ -187,6 +107,31 @@
       </div>
     </aside>
     <article class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <header>
+        <nav class="navbar navbar-expand-sm p-4">
+          <div class="container">
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+              <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" href="index.html" aria-current="page">Inicio
+                    <span class="visually-hidden">(current)</span></a>
+                </li>
+                <li class="nav-item d-none">
+                  <a class="nav-link" href="converter.html">Conversor</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link d-none" href="snippets.html">Snippets</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
       <div
         style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
         class="chartjs-size-monitor">

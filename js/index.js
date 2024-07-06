@@ -48,3 +48,4 @@ urls.forEach((url, index) => {
     .catch(error => console.log(error));
 });
 
+window.addEventListener('resize', () => sidebar.style.minHeight = document.body.scrollHeight + 'px');
