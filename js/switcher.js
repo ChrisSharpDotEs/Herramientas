@@ -40,7 +40,6 @@ class ThemeSwitcher {
             themeSwitcher.focus();
         }
 
-        console.log(localStorage.getItem('theme'));
         document.querySelectorAll('[data-bs-theme]').forEach(
             theme => theme.setAttribute('data-bs-theme', localStorage.getItem('theme'))
         );
