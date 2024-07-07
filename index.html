@@ -41,6 +41,25 @@
 </head>
 
 <body data-bs-theme="">
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-0 border-0">
+        <div class="modal-body">
+          Este sitio web no utiliza cookies para mejorar la experiencia del usuario y analizar el rendimiento 
+          y tráfico de nuestro sitio web. Al continuar navegando en este sitio, aceptas nuestro uso de cookies.<br> 
+          Para obtener más información, consulta nuestra 
+          <a href="/privacy-policy">Política de Privacidad</a>.
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <main class="row">
     <aside class="d-md-block d-none col-md-3 col-lg-2">
       <div id="sidebar" class="sidebar border border-right p-0 bg-body-tertiary">
@@ -55,8 +74,8 @@
             <div class="accordion" id="accordionExample">
               <div class="bg-transparent accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button collapsed bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                    aria-expanded="false" aria-controls="collapseOne">
+                  <button class="accordion-button collapsed bg-transparent" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                     Resultados
                   </button>
                 </h2>
@@ -72,13 +91,13 @@
                       <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2" href="#">
                           <i class="bi bi-people fs-3"></i>
-                          
+
                         </a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2" href="#">
                           <i class="bi bi-graph-up fs-3"></i>
-                          
+
                         </a>
                       </li>
                     </ul>
@@ -134,30 +153,21 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
         <h1 class="h2">Información meteorológica</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
+          <div class="btn-group mx-4">
             <button class="btn btn-sm btn-outline-secondary">Share</button>
             <button class="btn btn-sm btn-outline-secondary">Export</button>
           </div>
-          <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="feather feather-calendar">
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            This week
+          <div class="input-group">
+            <input type="date" name="fecha" id="dateFilter">
           </button>
+          </div> 
         </div>
       </div>
       <div class="row">
         <div class="col-lg-6 my-4">
-          <h4>Temperatura mínimas y máximas en Candelaria 2024</h4>
           <canvas class="chartjs-render-monitor" id="myChart0"></canvas>
         </div>
         <div class="col-lg-6 my-4">
-          <h4>Temperatura mínimas y máximas en Izaña 2024</h4>
           <canvas class="chartjs-render-monitor" id="myChart1"></canvas>
         </div>
       </div>
@@ -181,7 +191,7 @@
       </li>
       <li>
         <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark"
-          aria-pressed="true">
+          aria-pressed="false">
           <i class="bi bi-moon-stars-fill me-2 opacity-50"></i>
           Dark
           <i class="bi bi-check2 ms-auto d-none" width="1em" height="1em"></i>
@@ -192,110 +202,19 @@
           aria-pressed="false">
           <i class="bi bi-circle-half me-2 opacity-50" width="1em" height="1em"></i>
           Auto
-          <i class="bi bi-check2 ms-auto" width="1em" height="1em"></i>
+          <i class="bi bi-check2 ms-auto d-none" width="1em" height="1em"></i>
         </button>
       </li>
     </ul>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+  <script src="js/switcher.js"></script>
   <script>
-      /*!
-   * Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
-   * Copyright 2011-2024 The Bootstrap Authors
-   * Licensed under the Creative Commons Attribution 3.0 Unported License.
-   */
-
-      (() => {
-        'use strict'
-
-        const getStoredTheme = () => localStorage.getItem('theme')
-        const setStoredTheme = theme => localStorage.setItem('theme', theme)
-
-        const getPreferredTheme = () => {
-          const storedTheme = getStoredTheme();
-          if (storedTheme) {
-            return storedTheme;
-          }
-
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-
-        const setTheme = theme => {
-          if (theme === 'auto') {
-            document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
-          } else {
-            document.documentElement.setAttribute('data-bs-theme', theme)
-          }
-        };
-
-        const showActiveTheme = (theme, focus = false) => {
-          const themeSwitcher = document.querySelector('#bd-theme');
-
-          if (!themeSwitcher) {
-            return
-          }
-
-          /*const ColorThemeSwitcher = {
-            themeSwitcherText: document.querySelector('#bd-theme-text'),
-            activeThemeIcon: document.querySelector('i.theme-icon-active'),
-            btnToActive: document.querySelector(`[data-bs-theme-value="${theme}"]`),
-            iconOfActiveBtn: btnToActive.querySelector('i').classList.item(1),
-
-            deactivate: document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-              element.classList.remove('active')
-              element.setAttribute('aria-pressed', 'false')
-            }),
-
-          };*/
-
-          const themeSwitcherText = document.querySelector('#bd-theme-text');
-          const activeThemeIcon = document.querySelector('i.theme-icon-active');
-          const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`);
-
-          const iconOfActiveBtn = btnToActive.querySelector('i').classList.item(1);
-
-          document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-            element.classList.remove('active')
-            element.setAttribute('aria-pressed', 'false')
-          });
-
-          btnToActive.classList.add('active');
-          btnToActive.setAttribute('aria-pressed', 'true');
-
-
-          activeThemeIcon.classList.replace(activeThemeIcon.classList.item(1), iconOfActiveBtn);
-
-          const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
-          themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
-
-          if (focus) {
-            themeSwitcher.focus()
-          }
-          console.log(localStorage.getItem('theme'));
-          document.querySelectorAll('[data-bs-theme]').forEach(
-            theme => theme.setAttribute('data-bs-theme', localStorage.getItem('theme'))
-          );
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-          showActiveTheme(getPreferredTheme());
-
-          document.querySelectorAll('[data-bs-theme-value]').forEach(toggle => {
-            toggle.addEventListener('click', () => {
-              const theme = toggle.getAttribute('data-bs-theme-value');
-              setStoredTheme(theme);
-              setTheme(theme);
-              showActiveTheme(theme, true);
-            });
-          });
-
-        });
-
-      })();
-
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   </script>
 </body>
 
