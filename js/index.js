@@ -1,63 +1,74 @@
 
-let urls = ['candelariaData.json', 'izanaData.json'];
+let urls = ['candelaria', 'izana'];
 
 urls.forEach((url, index) => {
-    fetch(url)
-    .then(response => {
-        if (!response.ok)
-            throw new Error('Ha ocurrido un error: ' + response.statusText);
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);
-
-        //TODO
-        (() => {
-            'use strict';
-
-            // Graphs
-            const ctx = document.getElementById('myChart' + index);
+    fetch('app/' + url + 'Data.json')
+        .then(response => {
+            if (!response.ok)
+                throw new Error('Ha ocurrido un error: ' + response.statusText);
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
             let fechas = data.map(item => item.fecha);
-            let tempmax = data.map(item => item.tmax.replace(',', '.'));
-            let tempmin = data.map(item => item.tmin.replace(',', '.'));
+            let tmax = data.map(item => item.tmax.replace(',', '.'));
+            let tmin = data.map(item => item.tmin.replace(',', '.'));
 
-            let chartConfig1 = Object.create(ChartConfig);
-            chartConfig1.init(fechas, tempmax);
-            chartConfig1.data.datasets.push(
-                {   
-                    label: 'Temp. min.',
-                    data: tempmin,
-                    backgroundColor: 'transparent',
-                    borderColor: '',
-                    borderWidth: 2,
-                    pointBackgroundColor: '#72b4f2',
-                    pointRadius: 1
-                }
-            );
-
-            const myChart = new Chart(ctx, {
-                type: 'line',
-                data: chartConfig1.getData(),
-                options: chartConfig1.getOptions()
-            });
-
-            chartConfig1.data.datasets.pop();
-
-        })();
-    })
-    .catch(error => console.log(error));
+            (() => {
+                'use strict';
+            
+                // Graphs
+                const ctx = document.getElementById('myChart' + index);
+            
+                let datasets = [
+                    {
+                        label: 'T. max',
+                        data: tmax,
+                        borderWidth: 1,
+                        borderColor:  'red',
+                        pointRadius: 1
+                    },
+                    {
+                        label: 'T. min',
+                        data: tmin,
+                        borderWidth: 1,
+                        borderColor:  'blue',
+                        pointRadius: 1
+                    }
+                ];
+            
+            
+                const myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: fechas,
+                        datasets: datasets
+                    },
+                    options: {
+                        
+                    },
+                    plugins:{
+                        labels: {
+                            display: true
+                        }
+                    }
+                });
+            
+            })();
+        })
+        .catch(error => console.log(error));
 });
 
-window.addEventListener('resize', () =>  {
-    if(document.body.scrollHeight <= window.innerHeight){
-        return sidebar.style.minHeight = window.innerHeight + 'px'; 
+window.addEventListener('resize', () => {
+    if (document.body.scrollHeight <= window.innerHeight) {
+        return sidebar.style.minHeight = window.innerHeight + 'px';
     } else {
         return sidebar.style.minHeight = document.body.scrollHeight + 'px';
     }
 });
 
-if(document.body.scrollHeight <= window.innerHeight){
-    sidebar.style.minHeight = window.innerHeight + 'px'; 
+if (document.body.scrollHeight <= window.innerHeight) {
+    sidebar.style.minHeight = window.innerHeight + 'px';
 } else {
     sidebar.style.minHeight = document.body.scrollHeight + 'px';
 }
