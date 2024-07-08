@@ -27,7 +27,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         keyboard: false  // Evita que se cierre el modal pulsando la tecla "Esc"
     });
     cookiegood.addEventListener('click', () => {
-        document.cookie = 'nombreDeCookie=valorDeCookie; path=/; SameSite=None; Secure';
+        const date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        
+        document.cookie = 'nombreDeCookie=valorDeCookie;' + expires + 'path=/; SameSite=None; Secure';
         myModal.hide();
     })
     if(!document.cookie){
