@@ -20,7 +20,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
         keyboard: false  // Evita que se cierre el modal pulsando la tecla "Esc"
     });
-    myModal.show();
+    cookiegood.addEventListener('click', () => {
+        document.cookie = 'nombreDeCookie=valorDeCookie; path=/; SameSite=None; Secure';
+        myModal.hide();
+    })
+    if(!document.cookie){
+        myModal.show();
+    }
+   
 
     urls.forEach((url, index) => {
         fetch('app/' + url + 'Data.json')
