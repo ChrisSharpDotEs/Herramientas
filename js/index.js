@@ -1,5 +1,11 @@
 let urls = ['candelaria', 'izana'];
 
+function establecerLimites(fechas, lim){
+    fromDate.min = fechas[0];
+    fromDate.max = fechas[fechas.length - lim];
+    toDate.min = fechas[0];
+    toDate.max = fechas[fechas.length - 1];
+}
 
 window.addEventListener('resize', () => {
     if (document.body.scrollHeight <= window.innerHeight) {
@@ -15,7 +21,7 @@ if (document.body.scrollHeight <= window.innerHeight) {
     sidebar.style.minHeight = document.body.scrollHeight + 'px';
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
 
     let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
         keyboard: false  // Evita que se cierre el modal pulsando la tecla "Esc"
@@ -28,8 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
         myModal.show();
     }
    
-
-    urls.forEach((url, index) => {
+    let fetchedData = {};
+    
+    await urls.forEach((url, index) => {
         fetch('app/' + url + 'Data.json')
             .then(response => {
                 if (!response.ok)
@@ -38,14 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 console.log(data);
-                let fecha = '2024-05-01';
+                fetchedData = data;
 
                 let nombre = data[0].nombre;
-                let filteredData = data.filter(item => item.fecha >= fecha);
 
-                let fechas = filteredData.map(item => item.fecha);
-                let tmax = filteredData.map(item => item.tmax.replace(',', '.'));
-                let tmin = filteredData.map(item => item.tmin.replace(',', '.'));
+                let fechas = data.map(item => item.fecha);
+
+                establecerLimites(fechas, 7);
+
+                let tmax = data.map(item => item.tmax.replace(',', '.'));
+                let tmin = data.map(item => item.tmin.replace(',', '.'));
 
                 (() => {
                     'use strict';
@@ -90,8 +99,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     });
 
+                    dateFilter.addEventListener('click', (e) => {
+                        
+                        const filteredData = data.filter(item => item.fecha >= fromDate.value && item.fecha <= toDate.value);
+
+                        myChart.data.labels = filteredData.map(item => item.fecha);
+                        myChart.data.datasets[0].data = filteredData.map(item => item.tmax.replace(',', '.'));
+                        myChart.data.datasets[1].data = filteredData.map(item => item.tmin.replace(',', '.'));
+                        myChart.update();
+                    });
                 })();
             })
             .catch(error => console.log(error));
     });
+    
+
 });
