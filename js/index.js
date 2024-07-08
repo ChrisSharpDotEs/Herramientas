@@ -1,27 +1,25 @@
 let urls = ['candelaria', 'izana'];
 
-function establecerLimites(fechas, lim){
+function establecerLimites(fechas, lim) {
     fromDate.min = fechas[0];
     fromDate.max = fechas[fechas.length - lim];
     toDate.min = fechas[0];
     toDate.max = fechas[fechas.length - 1];
 }
 
-window.addEventListener('resize', () => {
-    if (document.body.scrollHeight <= window.innerHeight) {
-        return sidebar.style.minHeight = window.innerHeight + 'px';
-    } else {
-        return sidebar.style.minHeight = document.body.scrollHeight + 'px';
-    }
-});
+function setSideBarHeight(){
+    const body = document.body;
+    const html = document.documentElement;
+    const documentHeight = Math.max(
+        body.scrollHeight, body.offsetHeight,
+        html.clientHeight, html.scrollHeight, html.offsetHeight
+    );
 
-if (document.body.scrollHeight <= window.innerHeight) {
-    sidebar.style.minHeight = window.innerHeight + 'px';
-} else {
-    sidebar.style.minHeight = document.body.scrollHeight + 'px';
+    console.log(documentHeight, body.scrollHeight);
+    sidebar.style.minHeight = documentHeight + 'px';
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
         keyboard: false  // Evita que se cierre el modal pulsando la tecla "Esc"
@@ -30,18 +28,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         const date = new Date();
         date.setTime(date.getTime() + (minutes * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
-        
+
         document.cookie = 'nombreDeCookie=valorDeCookie;' + expires + 'path=/; SameSite=None; Secure';
         myModal.hide();
     })
-    if(!document.cookie){
+    if (!document.cookie) {
         myModal.show();
     }
-   
+
     let fetchedData = {};
-    
-    await urls.forEach((url, index) => {
-        fetch('app/' + url + 'Data.json')
+
+    urls.forEach(async (url, index) => {
+        await fetch('app/' + url + 'Data.json')
             .then(response => {
                 if (!response.ok)
                     throw new Error('Ha ocurrido un error: ' + response.statusText);
@@ -104,7 +102,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     });
 
                     dateFilter.addEventListener('click', (e) => {
-                        
+
                         const filteredData = data.filter(item => item.fecha >= fromDate.value && item.fecha <= toDate.value);
 
                         myChart.data.labels = filteredData.map(item => item.fecha);
@@ -112,10 +110,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                         myChart.data.datasets[1].data = filteredData.map(item => item.tmin.replace(',', '.'));
                         myChart.update();
                     });
+
+                    setSideBarHeight();
                 })();
             })
             .catch(error => console.log(error));
     });
-    
 
 });
