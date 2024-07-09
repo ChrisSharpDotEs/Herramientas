@@ -1,4 +1,4 @@
-let urls = ['candelaria', 'izana'];
+let urls = ['candelaria', 'izana', 'agulo', 'elpinar'];
 
 function establecerLimites(fechas, lim) {
     fromDate.min = fechas[0];
@@ -24,14 +24,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
         keyboard: false  // Evita que se cierre el modal pulsando la tecla "Esc"
     });
+
     cookiegood.addEventListener('click', () => {
         const date = new Date();
-        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        date.setTime(date.getTime() + (1 * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
+        console.log(date, expires);
 
         document.cookie = 'nombreDeCookie=valorDeCookie;' + expires + 'path=/; SameSite=None; Secure';
         myModal.hide();
-    })
+    });
+
     if (!document.cookie) {
         myModal.show();
     }
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let fetchedData = {};
 
     urls.forEach(async (url, index) => {
-        await fetch('app/' + url + 'Data.json')
+        await fetch('app/' + url + '.json')
             .then(response => {
                 if (!response.ok)
                     throw new Error('Ha ocurrido un error: ' + response.statusText);
