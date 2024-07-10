@@ -50,6 +50,11 @@
       position: absolute;
       top: 3rem;
       right: 0;
+      animation: growup 1 linear;
+    }
+
+    @keyframes growup {
+      0%{}
     }
   </style>
 </head>
@@ -145,21 +150,27 @@
     <article class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       <header class="border-bottom">
         <nav class="navbar align-items-between">
-          <h2 class="h2">Información meteorológica</h2>
+          <h2 class="fs-lg-2 fs-5">Información meteorológica</h2>
           <button id="collapseButton" class="btn border-0 d-md-none" type="button">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div id="nav-menu" class="card collapse hide">
+          <div id="nav-menu" class="card collapse">
             <div class="card-header">
               Títutlo
             </div>
-            <div class="card-body">
+            <div class="card-body px-0">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   Candelaria
                 </li>
                 <li class="list-group-item">
                   Agulo
+                </li>
+                <li class="list-group-item">
+                  El Pinar, depósito
+                </li>
+                <li class="list-group-item">
+                  Izaña
                 </li>
               </ul>
             </div>
@@ -168,7 +179,6 @@
       </header>
       <div class="my-5"></div>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-
         <div class="row gap-2">
           <div class="form-group col-lg-4 mb-3">
             <label class="form-label" for="desde">Desde</label>
@@ -242,15 +252,14 @@
     collapseButton.addEventListener('click', () => {
       let top = document.getElementById('nav-menu');
 
-      if(top.classList.contains('hide')){
-        top.classList.replace('hide', 'show');
+      if(top.classList.contains('collapse')){
+        
         top.classList.replace('collapse', 'collapsing');
-        setTimeout(() => top.classList.replace('collapsing', 'collapsed'), 500);
+        setTimeout(() => top.classList.replace('collapsing', 'collapsed'), 50);
 
       } else {
-        top.classList.replace('show', 'hide');
         top.classList.replace('collapsed', 'collapsing');
-        setTimeout(() => top.classList.replace('collapsing', 'collapse'), 500);
+        setTimeout(() => top.classList.replace('collapsing', 'collapse'), 50);
       }
     });
 
@@ -264,6 +273,26 @@
         }
       })
     }));
+
+    document.querySelectorAll('.list-group-item').forEach(listItem => listItem.addEventListener('click', (e) => {
+      e.currentTarget.classList.toggle('bg-secondary');
+      let graphname = e.currentTarget.innerHTML.toLowerCase().trim();
+      document.querySelectorAll('canvas').forEach(item => {
+        console.log(graphname, item.getAttribute('data-name'))
+        if (item.getAttribute('data-name') == graphname) {
+          item.classList.toggle('d-none');
+        }
+      })
+    }));
+
+    window.onclick = function(){
+      let top = document.getElementById('nav-menu');
+      if(top.classList.contains('collapsed')){
+        top.classList.replace('collapsed', 'collapsing');
+        setTimeout(() => top.classList.replace('collapsing', 'collapse'), 50);
+
+      }
+    }
 
   </script>
 </body>

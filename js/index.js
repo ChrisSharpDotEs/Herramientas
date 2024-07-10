@@ -14,8 +14,6 @@ function setSideBarHeight(){
         body.scrollHeight, body.offsetHeight,
         html.clientHeight, html.scrollHeight, html.offsetHeight
     );
-
-    console.log(documentHeight, body.scrollHeight);
     sidebar.style.minHeight = documentHeight + 'px';
 }
 
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const date = new Date();
         date.setTime(date.getTime() + (1 * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
-        console.log(date, expires);
 
         document.cookie = 'nombreDeCookie=valorDeCookie;' + expires + 'path=/; SameSite=None; Secure';
         myModal.hide();
@@ -105,12 +102,23 @@ document.addEventListener('DOMContentLoaded', function () {
                                         size: '20px'
                                     }
                                 }
+                            },
+                            scales: {
+                                x: {
+                                    grid: {
+                                        color: '#7d7d7d'
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        color: '#7d7d7d'
+                                    }
+                                }
                             }
                         }
                     });
 
                     dateFilter.addEventListener('click', (e) => {
-
                         const filteredData = data.filter(item => item.fecha >= fromDate.value && item.fecha <= toDate.value);
 
                         myChart.data.labels = filteredData.map(item => item.fecha);
