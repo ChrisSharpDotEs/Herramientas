@@ -42,8 +42,14 @@
       width: 4rem;
     }
 
-    input{
+    input {
       width: 11rem !important;
+    }
+
+    #nav-menu {
+      position: absolute;
+      top: 3rem;
+      right: 0;
     }
   </style>
 </head>
@@ -54,9 +60,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content rounded-0 border-0">
         <div class="modal-body">
-          Este sitio web no utiliza cookies para mejorar la experiencia del usuario y analizar el rendimiento 
-          y tráfico de nuestro sitio web. Solo utiliza una cookie de prueba de duración inferior a 5 minutos. Al continuar navegando en este sitio, aceptas nuestro uso de cookies.<br> 
-          Para obtener más información, consulta nuestra 
+          Este sitio web no utiliza cookies para mejorar la experiencia del usuario y analizar el rendimiento
+          y tráfico de nuestro sitio web. Solo utiliza una cookie de prueba de duración inferior a 5 minutos. Al
+          continuar navegando en este sitio, aceptas nuestro uso de cookies.<br>
+          Para obtener más información, consulta nuestra
           <a href="/privacy-policy">Política de Privacidad</a>.
 
         </div>
@@ -67,8 +74,7 @@
       </div>
     </div>
   </div>
-
-  <main class="row">
+  <main class="row mx-0">
     <aside class="d-md-block d-none col-md-3 col-lg-2">
       <div id="sidebar" class="sidebar border border-right p-0 bg-body-tertiary">
         <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="2" id="sidebarMenu"
@@ -84,7 +90,8 @@
                 <h2 class="accordion-header" id="headingOne">
                   <button class="accordion-button collapsed bg-transparent" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    Resultados
+                    <i class="bi bi-graph-up fs-3"></i>
+                    <span class="px-2">Gráficos</span>
                   </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
@@ -93,17 +100,22 @@
                     <ul class="nav flex-column">
                       <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2" href="#">
-                          <i class="bi bi-cart fs-3"></i>
+                          <span>Agulo</span>
                         </a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2" href="#">
-                          <i class="bi bi-people fs-3"></i>
+                          <span>Candelaria</span>
                         </a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2" href="#">
-                          <i class="bi bi-graph-up fs-3"></i>
+                          <span>El Pinar, depósito</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2" href="#">
+                          <span>Izaña</span>
                         </a>
                       </li>
                     </ul>
@@ -132,25 +144,22 @@
     </aside>
     <article class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
       <header class="border-bottom">
-        <nav class="navbar navbar-expand-md p-lg-4">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#"></a>
-            <button class="btn border-0 d-lg-none" type="button" data-bs-toggle="collapse"
-              data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-              <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" href="index.html" aria-current="page">Inicio
-                    <span class="visually-hidden">(current)</span></a>
+        <nav class="navbar align-items-between">
+          <h2 class="h2">Información meteorológica</h2>
+          <button id="collapseButton" class="btn border-0 d-md-none" type="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="nav-menu" class="card collapse hide">
+            <div class="card-header">
+              Títutlo
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  Candelaria
                 </li>
-                <li class="nav-item d-none">
-                  <a class="nav-link" href="converter.html">Conversor</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link d-none" href="snippets.html">Snippets</a>
+                <li class="list-group-item">
+                  Agulo
                 </li>
               </ul>
             </div>
@@ -159,7 +168,7 @@
       </header>
       <div class="my-5"></div>
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2">Información meteorológica</h1>
+
         <div class="row gap-2">
           <div class="form-group col-lg-4 mb-3">
             <label class="form-label" for="desde">Desde</label>
@@ -175,18 +184,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 my-4">
-          <canvas class="chartjs-render-monitor" id="myChart0" height="300px"></canvas>
-        </div>
-        <div class="col-lg-6 my-4">
-          <canvas class="chartjs-render-monitor" id="myChart1" height="300px"></canvas>
-        </div>
-        <div class="col-lg-6 my-4">
-          <canvas class="chartjs-render-monitor" id="myChart2" height="300px"></canvas>
-        </div>
-        <div class="col-lg-6 my-4">
-          <canvas class="chartjs-render-monitor" id="myChart3" height="300px"></canvas>
-        </div>
+        <canvas class="chartjs-render-monitor d-none" id="myChart0" width="400px" height="300px"></canvas>
+        <canvas class="chartjs-render-monitor d-none" id="myChart1" width="400px" height="300px"></canvas>
+        <canvas class="chartjs-render-monitor d-none" id="myChart2" width="400px" height="300px"></canvas>
+        <canvas class="chartjs-render-monitor d-none" id="myChart3" width="400px" height="300px"></canvas>
       </div>
     </article>
   </main>
@@ -224,7 +225,9 @@
     </ul>
   </div>
   <footer>
-    Información elaborada por la Agencia Estatal de Meteorología
+    <p>
+      <small>Información elaborada por la Agencia Estatal de Meteorología</small>
+    </p>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="node_modules/chart.js/dist/chart.umd.js"></script>
@@ -234,7 +237,25 @@
   <script src="js/switcher.js"></script>
   <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
+    collapseButton.addEventListener('click', () => {
+      let top = document.getElementById('nav-menu');
+
+      top.classList.contains('hide') ? top.classList.replace('hide', 'show') : top.classList.replace('show', 'hide');
+    });
+
+    document.querySelectorAll('.nav-item').forEach(listItem => listItem.addEventListener('click', (e) => {
+      e.currentTarget.classList.toggle('bg-secondary');
+      let graphname = e.currentTarget.querySelector('span').innerHTML.toLowerCase();
+      document.querySelectorAll('canvas').forEach(item => {
+        console.log(graphname, item.getAttribute('data-name'))
+        if (item.getAttribute('data-name') == graphname) {
+          item.classList.toggle('d-none');
+        }
+      })
+    }));
+
   </script>
 </body>
 

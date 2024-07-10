@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', function () {
         myModal.hide();
     });
 
+    document.getElementsByClassName('navbar-toggler-icon')[0].addEventListener('click', function(){
+         
+    });
+
     if (!document.cookie) {
         myModal.show();
     }
@@ -65,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     'use strict';
                     const ctx = document.getElementById('myChart' + index);
 
+                    ctx.setAttribute('data-name', nombre.toLowerCase());
                     let datasets = [
                         {
                             label: 'T. max',
