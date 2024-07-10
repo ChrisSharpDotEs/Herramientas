@@ -242,7 +242,16 @@
     collapseButton.addEventListener('click', () => {
       let top = document.getElementById('nav-menu');
 
-      top.classList.contains('hide') ? top.classList.replace('hide', 'show') : top.classList.replace('show', 'hide');
+      if(top.classList.contains('hide')){
+        top.classList.replace('hide', 'show');
+        top.classList.replace('collapse', 'collapsing');
+        setTimeout(() => top.classList.replace('collapsing', 'collapsed'), 500);
+
+      } else {
+        top.classList.replace('show', 'hide');
+        top.classList.replace('collapsed', 'collapsing');
+        setTimeout(() => top.classList.replace('collapsing', 'collapse'), 500);
+      }
     });
 
     document.querySelectorAll('.nav-item').forEach(listItem => listItem.addEventListener('click', (e) => {
