@@ -25,276 +25,172 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- External scripts -->
+  <!-- External scripts and CDNs-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
   <script src="js/index.js" type="module"></script>
   <style>
-    .accordion {
-      --bs-accordion-border-color: #ffffff00 !important;
-    }
-
     input:not(.form-check-input),
     select,
     textarea {
       border-radius: 0px !important;
     }
 
-    label {
-      width: 4rem;
-    }
-
-    input {
-      width: 11rem !important;
-    }
-
-    #nav-menu {
-      position: absolute;
-      top: 3rem;
-      right: 0;
-      animation: growup 1 linear;
-    }
-
-    @keyframes growup {
-      0%{}
+    tbody>tr {
+      cursor: pointer;
     }
   </style>
 </head>
 
-<body data-bs-theme="">
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content rounded-0 border-0">
-        <div class="modal-body">
-          Este sitio web no utiliza cookies para mejorar la experiencia del usuario y analizar el rendimiento
-          y tráfico de nuestro sitio web. Solo utiliza una cookie de prueba de duración inferior a 5 minutos. Al
-          continuar navegando en este sitio, aceptas nuestro uso de cookies.<br>
-          Para obtener más información, consulta nuestra
-          <a href="/privacy-policy">Política de Privacidad</a>.
-
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm p-4">
+      <div class="container">
+        <a class="navbar-brand" href="#">Mis herramientas</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html" aria-current="page">Inicio
+                <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="converter.html">Conversor</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="snippets.html">Snippets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="meteorologia.html">Meteo</a>
+            </li>
+          </ul>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="cookiegood">Aceptar</button>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="my-4"></div>
+    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+      aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">
+              Modal title
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">Body</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <main class="row mx-0">
-    <aside class="d-md-block d-none col-md-3 col-lg-2">
-      <div id="sidebar" class="sidebar border border-right p-0 bg-body-tertiary">
-        <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="2" id="sidebarMenu"
-          aria-labelledby="sidebarMenuLabel">
-          <div class="offcanvas-header">
-            <a class="navbar-brand" href="#">Mis herramientas</a>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
-              aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-            <div class="accordion" id="accordionExample">
-              <div class="bg-transparent accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button collapsed bg-transparent" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    <i class="bi bi-graph-up fs-3"></i>
-                    <span class="px-2">Gráficos</span>
-                  </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2" href="#">
-                          <span>Agulo</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2" href="#">
-                          <span>Candelaria</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2" href="#">
-                          <span>El Pinar, depósito</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2" href="#">
-                          <span>Izaña</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr class="my-3">
-            <ul class="nav flex-column mb-auto">
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-gear-wide-connected fs-3"></i>
-                  Settings
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link d-flex align-items-center gap-2" href="#">
-                  <i class="bi bi-door-closed fs-3"></i>
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <article class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-      <header class="border-bottom">
-        <nav class="navbar align-items-between">
-          <h2 class="fs-lg-2 fs-5">Información meteorológica</h2>
-          <button id="collapseButton" class="btn border-0 d-md-none" type="button">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div id="nav-menu" class="card collapse">
-            <div class="card-header">
-              Títutlo
-            </div>
-            <div class="card-body px-0">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  Candelaria
-                </li>
-                <li class="list-group-item">
-                  Agulo
-                </li>
-                <li class="list-group-item">
-                  El Pinar, depósito
-                </li>
-                <li class="list-group-item">
-                  Izaña
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
-      <div class="my-5"></div>
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <div class="row gap-2">
-          <div class="form-group col-lg-4 mb-3">
-            <label class="form-label" for="desde">Desde</label>
-            <input class="form-control" type="date" name="desde" id="fromDate">
-          </div>
-          <div class="form-group col-lg-4 mb-3">
-            <label class="form-label" for="hasta">Hasta</label>
-            <input class="form-control" type="date" name="hasta" id="toDate">
-          </div>
-          <div class="form-group col-lg-4 mb-3">
-            <button class="btn btn-secondary" id="dateFilter">Consultar</button>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <canvas class="chartjs-render-monitor d-none" id="myChart0" width="400px" height="300px"></canvas>
-        <canvas class="chartjs-render-monitor d-none" id="myChart1" width="400px" height="300px"></canvas>
-        <canvas class="chartjs-render-monitor d-none" id="myChart2" width="400px" height="300px"></canvas>
-        <canvas class="chartjs-render-monitor d-none" id="myChart3" width="400px" height="300px"></canvas>
-      </div>
-    </article>
+    <div class="container">
+      <article>
+        <h3>Lista de tareas</h3>
+        <table id="sortable-table" class="table table-hover">
+          <thead>
+            <tr>
+              <th>Encargado</th>
+              <th>Código</th>
+              <th>Concepto</th>
+              <th>Fecha creación</th>
+              <th>Estado</th>
+              <th>Prioridad</th>
+              <th>Modificar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-status="not started">
+              <td>
+                <img src="" alt="">
+                <span>Javier</span>
+              </td>
+              <td>0165</td>
+              <td>Crear snippet</td>
+              <td>24/07/2024</td>
+              <td>Pendiente</td>
+              <td>Alta</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-down"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-up"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
+              </td>
+              <td><i class="bi bi-exclamation-triangle fs-5 text-danger"></i></td>
+            </tr>
+            <tr data-status="started">
+              <td>
+                <img src="" alt="">
+                <span>Javier</span>
+              </td>
+              <td>0165</td>
+              <td>Crear snippet</td>
+              <td>24/07/2024</td>
+              <td>Comenzado</td>
+              <td>Media</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-down"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-up"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </div>
   </main>
-  <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-    <button class="btn btn-secondary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-      aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (dark)">
-      <i class="bi bi-moon-stars-fill my-1 theme-icon-active" width="1em" height="1em"></i>
-      <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-          aria-pressed="false">
-          <i class="bi bi-sun-fill me-2 opacity-50" width="1em" height="1em"></i>
-          Light
-          <i class="bi bi-check2 ms-auto d-none" width="1em" height="1em"></i>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark"
-          aria-pressed="false">
-          <i class="bi bi-moon-stars-fill me-2 opacity-50"></i>
-          Dark
-          <i class="bi bi-check2 ms-auto d-none" width="1em" height="1em"></i>
-        </button>
-      </li>
-      <li>
-        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
-          aria-pressed="false">
-          <i class="bi bi-circle-half me-2 opacity-50" width="1em" height="1em"></i>
-          Auto
-          <i class="bi bi-check2 ms-auto d-none" width="1em" height="1em"></i>
-        </button>
-      </li>
-    </ul>
-  </div>
-  <footer>
-    <p>
-      <small>Información elaborada por la Agencia Estatal de Meteorología</small>
-    </p>
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="js/switcher.js"></script>
-  <script>
-    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-
-    collapseButton.addEventListener('click', () => {
-      let top = document.getElementById('nav-menu');
-
-      if(top.classList.contains('collapse')){
-        
-        top.classList.replace('collapse', 'collapsing');
-        setTimeout(() => top.classList.replace('collapsing', 'collapsed'), 50);
-
-      } else {
-        top.classList.replace('collapsed', 'collapsing');
-        setTimeout(() => top.classList.replace('collapsing', 'collapse'), 50);
-      }
-    });
-
-    document.querySelectorAll('.nav-item').forEach(listItem => listItem.addEventListener('click', (e) => {
-      e.currentTarget.classList.toggle('bg-secondary');
-      let graphname = e.currentTarget.querySelector('span').innerHTML.toLowerCase();
-      document.querySelectorAll('canvas').forEach(item => {
-        console.log(graphname, item.getAttribute('data-name'))
-        if (item.getAttribute('data-name') == graphname) {
-          item.classList.toggle('d-none');
-        }
-      })
-    }));
-
-    document.querySelectorAll('.list-group-item').forEach(listItem => listItem.addEventListener('click', (e) => {
-      e.currentTarget.classList.toggle('bg-secondary');
-      let graphname = e.currentTarget.innerHTML.toLowerCase().trim();
-      document.querySelectorAll('canvas').forEach(item => {
-        console.log(graphname, item.getAttribute('data-name'))
-        if (item.getAttribute('data-name') == graphname) {
-          item.classList.toggle('d-none');
-        }
-      })
-    }));
-
-    window.onclick = function(){
-      let top = document.getElementById('nav-menu');
-      if(top.classList.contains('collapsed')){
-        top.classList.replace('collapsed', 'collapsing');
-        setTimeout(() => top.classList.replace('collapsing', 'collapse'), 50);
-
-      }
-    }
-
-  </script>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+
+<script>
+  var sortable = new Sortable(document.querySelector('#sortable-table tbody'), {
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+  });
+
+  function moveUp(row) {
+    var previous = row.previousElementSibling;
+    if (previous) {
+      row.parentNode.insertBefore(row, previous);
+    }
+  }
+
+  // Función para mover filas hacia abajo
+  function moveDown(row) {
+    var next = row.nextElementSibling;
+    if (next) {
+      row.parentNode.insertBefore(next, row);
+    }
+  }
+
+  // Añadir eventos a los botones
+  document.querySelectorAll('.bi-caret-up').forEach(button => {
+    button.parentNode.addEventListener('click', function () {
+      var row = this.parentNode.parentNode;
+      moveUp(row);
+    });
+  });
+
+  document.querySelectorAll('.bi-caret-down').forEach(button => {
+    button.parentNode.addEventListener('click', function () {
+      var row = this.parentNode.parentNode;
+      moveDown(row);
+    });
+  });
+</script>
 
 </html>

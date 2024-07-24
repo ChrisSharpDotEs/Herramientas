@@ -7,7 +7,7 @@ function establecerLimites(fechas, lim) {
     toDate.max = fechas[fechas.length - 1];
 }
 
-function setSideBarHeight(){
+function setSideBarHeight() {
     const body = document.body;
     const html = document.documentElement;
     const documentHeight = Math.max(
@@ -17,8 +17,7 @@ function setSideBarHeight(){
     sidebar.style.minHeight = documentHeight + 'px';
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-
+function meteo() {
     let myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
         keyboard: false  // Evita que se cierre el modal pulsando la tecla "Esc"
     });
@@ -32,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         myModal.hide();
     });
 
-    document.getElementsByClassName('navbar-toggler-icon')[0].addEventListener('click', function(){
-         
+    document.getElementsByClassName('navbar-toggler-icon')[0].addEventListener('click', function () {
+
     });
 
     if (!document.cookie) {
@@ -132,5 +131,48 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => console.log(error));
     });
+}
+
+function kanban(){
+    let tableColors = {
+        'not started': 'table-danger',
+        'started': 'table-warning',
+        'finished': 'table-success'
+    };
+
+    let tbody = document.getElementsByTagName('tbody')[0];
+
+    let rowData = [...document.getElementsByTagName('tr')].filter(item => item.hasAttribute('data-status'));
+    rowData.forEach(item => [...item.children].forEach(child => child.classList.add(tableColors[item.getAttribute('data-status')])));
+
+    
+    //$('#modalId').modal('show');
+    let modalId = document.getElementById('modalId');
+
+    document.querySelectorAll('i.bi-pencil-square').forEach(item => item.parentNode.addEventListener('click', (e) =>{
+        
+
+        let row = [...e.currentTarget.parentNode.parentNode.children]
+            .map(item => item.children.length > 0 ? [...item.children] : item.innerHTML);
+
+        let modalData = {
+            nombre: row[0][1].innerHTML,
+            imagen: row[0][0].src,
+            codigo: row[1],
+            concepto: row[1],
+            created_at: row[1],
+            status: row[1]
+        };
+        console.log(modalData);
+        $('#modalId').modal('show');
+    }));
+
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    //meteo();
+    kanban();
+
 
 });
