@@ -39,11 +39,10 @@
     textarea {
       border-radius: 0px !important;
     }
-
-    tbody>tr {
-      cursor: pointer;
-    }
   </style>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />
+
+  <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
 </head>
 
 <body>
@@ -78,22 +77,33 @@
   </header>
   <main>
     <div class="my-4"></div>
-    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    <div class="modal fade" id="kanmodal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
       aria-labelledby="modalTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content rounded-0">
           <div class="modal-header">
             <h5 class="modal-title" id="modalTitleId">
-              Modal title
+              Juan Negrín Negrín
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">Body</div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-4">
+                <img src="media/dummyuser.png" class="img-fluid rounded rounded-circle" alt="" width="50px" height="50px"/>
+              </div>
+              <div class="col-md-8">
+                <p>Crear snippets para la aplicación de x</p>
+                <p>fecha de creación: 24/07/2024</p>
+                <p><b>Estado:</b> pendiente</p>
+              </div>
+            </div>
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button class="btn text-danger" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom" title="Detener tarea"><i class="bi bi-box-arrow-in-down"></i></button>
+            <button class="btn text-warning" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom" title="Iniciar tarea"><i class="bi bi-box-arrow-in-up"></i></button>
+            <button class="btn text-success" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom" title="Finalizar tarea"><i class="bi bi-box-arrow-up"></i></button>
+            <button class="btn" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom" title="Modificar tarea"><i class="bi bi-save"></i></button>
           </div>
         </div>
       </div>
@@ -101,7 +111,7 @@
     <div class="container">
       <article>
         <h3>Lista de tareas</h3>
-        <table id="sortable-table" class="table table-hover">
+        <table id="sortable-table" class="table table-hover table-responsive">
           <thead>
             <tr>
               <th>Encargado</th>
@@ -129,7 +139,58 @@
                 <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-up"></i></button>
                 <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
               </td>
-              <td><i class="bi bi-exclamation-triangle fs-5 text-danger"></i></td>
+              <td><i class="bi bi-exclamation-triangle fs-5 p-2 text-danger"></i></td>
+            </tr>
+            <tr data-status="started">
+              <td>
+                <img src="" alt="">
+                <span>Javier</span>
+              </td>
+              <td>0165</td>
+              <td>Crear snippet</td>
+              <td>24/07/2024</td>
+              <td>Comenzado</td>
+              <td>Media</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-down"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-up"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
+              </td>
+              <td></td>
+            </tr>
+            <tr data-status="finished">
+              <td>
+                <img src="" alt="">
+                <span>Javier</span>
+              </td>
+              <td>0165</td>
+              <td>Crear snippet</td>
+              <td>24/07/2024</td>
+              <td>Finalizado</td>
+              <td>Media</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-down"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-up"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <img src="" alt="">
+                <span>Javier</span>
+              </td>
+              <td>0165</td>
+              <td>Crear snippet</td>
+              <td>24/07/2024</td>
+              <td>Sin estado</td>
+              <td>Media</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-down"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-caret-up"></i></button>
+                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
+              </td>
+              <td></td>
             </tr>
             <tr data-status="started">
               <td>

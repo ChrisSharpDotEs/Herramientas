@@ -143,11 +143,16 @@ function kanban(){
     let tbody = document.getElementsByTagName('tbody')[0];
 
     let rowData = [...document.getElementsByTagName('tr')].filter(item => item.hasAttribute('data-status'));
-    rowData.forEach(item => [...item.children].forEach(child => child.classList.add(tableColors[item.getAttribute('data-status')])));
-
+    rowData.forEach(item => {
+        [...item.children].forEach(child => child.classList.add(tableColors[item.getAttribute('data-status')]));
+        if(item.getAttribute('data-status') == 'finished'){
+            [...item.children].pop().appendChild(buildTrashButton());
+        }
+    });
+    
     
     //$('#modalId').modal('show');
-    let modalId = document.getElementById('modalId');
+    let modalId = document.getElementById('kanmodal');
 
     document.querySelectorAll('i.bi-pencil-square').forEach(item => item.parentNode.addEventListener('click', (e) =>{
         
@@ -164,9 +169,24 @@ function kanban(){
             status: row[1]
         };
         console.log(modalData);
-        $('#modalId').modal('show');
+
+        $('#kanmodal').modal('show');
     }));
 
+}
+
+function buildTrashButton(){
+    let button = document.createElement('button');
+    button.classList.add('btn');
+    [['data-toggle', "tooltip"], ['data-placement', 'bottom'], ['title', 'Eliminar tarea']].forEach(item => button.setAttribute(item[0], item[1]));
+    let icon = document.createElement('i');
+    icon.classList.add('bi', 'bi-trash');
+    button.appendChild(icon);
+    return button;
+}
+
+function buildModal(data){
+    kanmodal.getElementsByClassName('modal-body');
 }
 
 document.addEventListener('DOMContentLoaded', function () {
