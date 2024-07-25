@@ -109,17 +109,17 @@
           <div class="modal-footer">
             <button class="btn text-danger" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
               title="Detener tarea">
-              <i class="bi bi-box-arrow-in-down"></i>
+              <i class="bi bi-stop-circle"></i>
               <br>
               <small>Detener</small>
             </button>
-            <button class="btn text-warning" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
+            <button class="btn" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
               title="Iniciar tarea">
-              <i class="bi bi-box-arrow-in-up"></i>
+              <i class="bi bi-play-circle"></i>
               <br>
               <small>Iniciar</small>
             </button>
-            <button class="btn text-success" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
+            <button class="btn" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
               title="Finalizar tarea">
               <i class="bi bi-box-arrow-up"></i>
               <br>
@@ -135,8 +135,8 @@
         </div>
       </div>
     </div>
-    <div class="modal fade" id="modalNuevaTarea" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-      aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal fade" id="modalNuevaTarea" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+      role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content rounded-0">
           <div class="modal-header">
@@ -146,19 +146,39 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="#" method="post">
+            <form id="new-task-form" action="#" method="post">
+              <div class="mb-3">
+                <label for="encargado" class="form-label">Encargado</label>
+                <input class="form-control" name="encargado" id="encargado" />
+              </div>
               <div class="mb-3">
                 <label for="descriptionTask" class="form-label">Descripción</label>
-                <input class="form-control" name="descriptionTask" id="descriptionTask"/>
+                <input class="form-control" name="descriptionTask" id="descriptionTask" />
               </div>
-              
+              <div class="mb-3">
+                <label for="fecha_fin" class="form-label">Fecha de finalización</label>
+                <input class="form-control" name="fecha_fin" id="fecha_fin" type="date" />
+              </div>
+              <div class="mb-3">
+                <label for="statustask" class="form-label">Status</label>
+                <select class="form-select form-select" name="statustask" id="statustask">
+                  <option value="0">Selecciona un estado...</option>
+                  <option value="not started">No iniciado</option>
+                  <option value="started">Iniciado</option>
+                  <option value="finished">Finalizado</option>
+                </select>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="">Alta</label>
+                <input class="form-check-input" type="checkbox" value="1" id="priorityTask" />
+              </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button id="save-new-task" type="button" class="btn btn-primary">Save</button>
           </div>
         </div>
       </div>
@@ -185,78 +205,7 @@
               <th>Cambiar</th>
             </tr>
           </thead>
-          <tbody>
-            <tr data-status="not started">
-              <td>
-                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
-                <span class="px-2">Javier</span>
-                <i class="bi bi-exclamation-triangle fs-5 p-2 text-danger"></i>
-              </td>
-              <td>0165</td>
-              <td>Crear snippet</td>
-              <td>24/07/2024</td>
-              <td>Pendiente</td>
-              <td>Alta</td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
-              </td>
-            </tr>
-            <tr data-status="started">
-              <td>
-                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
-                <span>Javier</span>
-              </td>
-              <td>0165</td>
-              <td>Crear snippet</td>
-              <td>24/07/2024</td>
-              <td>Comenzado</td>
-              <td>Media</td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
-              </td>
-            </tr>
-            <tr data-status="finished">
-              <td>
-                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
-                <span>Javier</span>
-              </td>
-              <td>0165</td>
-              <td>Crear snippet</td>
-              <td>24/07/2024</td>
-              <td>Finalizado</td>
-              <td>Media</td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
-                <span>Javier</span>
-              </td>
-              <td>0165</td>
-              <td>Crear snippet</td>
-              <td>24/07/2024</td>
-              <td>Sin estado</td>
-              <td>Media</td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
-              </td>
-            </tr>
-            <tr data-status="started">
-              <td>
-                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
-                <span>Javier</span>
-              </td>
-              <td>0165</td>
-              <td>Crear snippet</td>
-              <td>24/07/2024</td>
-              <td>Comenzado</td>
-              <td>Media</td>
-              <td>
-                <button class="btn btn-sm btn-outline-secondary rounded-0"><i class="bi bi-pencil-square"></i></button>
-              </td>
-            </tr>
+          <tbody id="tbodytasks">
           </tbody>
         </table>
       </article>
