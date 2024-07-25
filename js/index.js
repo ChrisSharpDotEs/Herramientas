@@ -146,7 +146,7 @@ function kanban(){
     rowData.forEach(item => {
         [...item.children].forEach(child => child.classList.add(tableColors[item.getAttribute('data-status')]));
         if(item.getAttribute('data-status') == 'finished'){
-            [...item.children].pop().appendChild(buildTrashButton());
+            [...item.children][item.children.length - 1].appendChild(buildTrashButton());
         }
     });
     
