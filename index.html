@@ -43,7 +43,8 @@
     textarea {
       border-radius: 0px !important;
     }
-    tr > th:last-child{
+
+    tr>th:last-child {
       min-width: fit-content;
     }
   </style>
@@ -89,20 +90,19 @@
         <div class="modal-content rounded-0">
           <div class="modal-header">
             <h5 class="modal-title" id="modalTitleId">
-              Juan Negrín Negrín
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-4">
-                <img src="media/dummyuser.png" class="img-fluid rounded rounded-circle" alt="" width="50px"
+                <img id="modalImage" src="" class="img-fluid rounded rounded-circle" alt="" width="50px"
                   height="50px" />
               </div>
               <div class="col-8">
                 <p>Crear snippets para la aplicación de x</p>
                 <p>fecha de creación: 24/07/2024</p>
-                <p><b>Estado:</b> pendiente</p>
+                <p id="modalStatus"></p>
               </div>
             </div>
           </div>
@@ -135,10 +135,38 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="modalNuevaTarea" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+      aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content rounded-0">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">
+              Crear nueva tarea
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="#" method="post">
+              <div class="mb-3">
+                <label for="descriptionTask" class="form-label">Descripción</label>
+                <input class="form-control" name="descriptionTask" id="descriptionTask"/>
+              </div>
+              
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <article class="my-4">
         <div class="border rounded p-4 bg-light">
-          <button type="button" class="btn btn-secondary">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalNuevaTarea">
             + Nueva tarea
           </button>
         </div>
@@ -160,8 +188,8 @@
           <tbody>
             <tr data-status="not started">
               <td>
-                <img src="" alt="">
-                <span>Javier</span>
+                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
+                <span class="px-2">Javier</span>
                 <i class="bi bi-exclamation-triangle fs-5 p-2 text-danger"></i>
               </td>
               <td>0165</td>
@@ -175,7 +203,7 @@
             </tr>
             <tr data-status="started">
               <td>
-                <img src="" alt="">
+                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
                 <span>Javier</span>
               </td>
               <td>0165</td>
@@ -189,7 +217,7 @@
             </tr>
             <tr data-status="finished">
               <td>
-                <img src="" alt="">
+                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
                 <span>Javier</span>
               </td>
               <td>0165</td>
@@ -203,7 +231,7 @@
             </tr>
             <tr>
               <td>
-                <img src="" alt="">
+                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
                 <span>Javier</span>
               </td>
               <td>0165</td>
@@ -217,7 +245,7 @@
             </tr>
             <tr data-status="started">
               <td>
-                <img src="" alt="">
+                <img class="img-fluid rounded rounded-circle" src="/media/dummyuser.png" alt="" width="30px">
                 <span>Javier</span>
               </td>
               <td>0165</td>

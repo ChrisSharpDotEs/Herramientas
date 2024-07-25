@@ -150,8 +150,6 @@ function kanban(){
         }
     });
     
-    
-    //$('#modalId').modal('show');
     let modalId = document.getElementById('kanmodal');
 
     document.querySelectorAll('i.bi-pencil-square').forEach(item => item.parentNode.addEventListener('click', (e) =>{
@@ -164,13 +162,14 @@ function kanban(){
             nombre: row[0][1].innerHTML,
             imagen: row[0][0].src,
             codigo: row[1],
-            concepto: row[1],
-            created_at: row[1],
-            status: row[1]
+            concepto: row[2],
+            created_at: row[3],
+            status: row[4]
         };
         console.log(modalData);
 
         $('#kanmodal').modal('show');
+        buildModal(modalData);
     }));
 
 }
@@ -186,7 +185,11 @@ function buildTrashButton(){
 }
 
 function buildModal(data){
-    kanmodal.getElementsByClassName('modal-body');
+    let modalbody = kanmodal.getElementsByClassName('modal-body')[0];
+    modalTitleId.innerHTML = data.nombre;
+    modalImage.src = data.imagen;
+    modalStatus.innerHTML = `<b>Estado:</b> ${data.status}`;
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
