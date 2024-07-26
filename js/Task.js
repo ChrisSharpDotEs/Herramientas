@@ -1,9 +1,16 @@
 const TaskManager = {
     kanban() {
+        this.loadTaskData();
         this.modifyTask();
 
         this.addTask();
     },
+
+    loadTaskData(){
+        let tbody = document.getElementById('tbodytasks');
+        let tasks = localStorage.getItem('task');
+        tasks.forEach(task => tbody.appendChild(this.buildTaskRow(task)));
+    }
 
     modifyTask() {
         document.querySelectorAll('i.bi-pencil-square').forEach(item => item.parentNode.addEventListener('click', (e) => {
