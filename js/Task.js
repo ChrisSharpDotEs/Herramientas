@@ -1,21 +1,34 @@
 const TaskManager = {
     kanban() {
-        try{
-        this.loadTaskData();
-        this.modifyTask();
+        try {
+            this.loadTaskData();
+            this.modifyTask();
+            this.addTask();
 
-        this.addTask();
         } catch (error) {
-            document.body.innerHTML = error;
+            tbodytasks.innerHTML = error;
         }
-        
+
     },
 
-    loadTaskData(){
+    loadTaskData() {
         let tbody = document.getElementById('tbodytasks');
-        let tasks = localStorage.getItem('task');
-        tasks.forEach(task => tbody.appendChild(this.buildTaskRow(task)));
-    }
+        let tasks = JSON.parse(localStorage.getItem('tasks'));
+        let table = document.getElementById('sortable-table');
+        let messages = document.getElementById('messages');
+
+        console.log(tasks);
+
+        if(tasks == null){
+            table.classList.add('d-none');
+            messages.classList.toggle('d-none');
+            messages.append('No hay tareas.')
+        } else {
+            messages.classList.toggle('d-none');
+            table.classList.remove('d-none');
+            tasks.forEach(task => tbody.appendChild(this.buildTaskRow(task)));
+        }
+    },
 
     modifyTask() {
         document.querySelectorAll('i.bi-pencil-square').forEach(item => item.parentNode.addEventListener('click', (e) => {
@@ -89,20 +102,19 @@ const TaskManager = {
             + '</button>';
         td.appendChild(this.buildTrashButton());
         tr.appendChild(td);
-        
+
         [...tr.children].forEach(item => item.classList.add(tableColors[tr.getAttribute('data-status')]));
 
         return tr;
     },
 
     addTask() {
-        let button = document.getElementById('save-new-task');
-        let form = document.getElementById('new-task-form');
+        let saveTaskButton = document.getElementById('save-new-task');
         let rowData = [...document.getElementsByTagName('tr')].filter(item => item.hasAttribute('data-status'));
-        
+
         let tbody = document.getElementById('tbodytasks');
 
-        button.addEventListener('click', () => {
+        saveTaskButton.addEventListener('click', () => {
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
             let fecha = new Date();
@@ -121,12 +133,10 @@ const TaskManager = {
             tasks.push(data);
 
             localStorage.setItem('tasks', JSON.stringify(tasks));
-            
+
             tbody.innerHTML = '';
 
-            tasks.forEach(task => tbody.appendChild(this.buildTaskRow(task)));
-            
-            
+            this.loadTaskData();
         });
     }
 };
