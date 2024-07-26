@@ -1,9 +1,14 @@
 const TaskManager = {
     kanban() {
+        try{
         this.loadTaskData();
         this.modifyTask();
 
         this.addTask();
+        } catch (error) {
+            document.body.innerHTML = error;
+        }
+        
     },
 
     loadTaskData(){
