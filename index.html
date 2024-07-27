@@ -84,101 +84,104 @@
     </nav>
   </header>
   <main>
-    <div class="modal fade" id="kanmodal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-      aria-labelledby="modalTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
-        <div class="modal-content rounded-0">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitleId">
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-4">
-                <img id="modalImage" src="" class="img-fluid rounded rounded-circle" alt="" width="50px"
-                  height="50px" />
-              </div>
-              <div class="col-8">
-                <p>Crear snippets para la aplicación de x</p>
-                <p>fecha de creación: 24/07/2024</p>
-                <p id="modalStatus"></p>
+    <div class="modal-containers">
+      <div class="modal fade" id="kanmodal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+          <div class="modal-content rounded-0">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitleId">
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-4">
+                  <img id="modalImage" src="" class="img-fluid rounded rounded-circle" alt="" width="50px"
+                    height="50px" />
+                </div>
+                <div class="col-8">
+                  <p>Crear snippets para la aplicación de x</p>
+                  <p>fecha de creación: 24/07/2024</p>
+                  <p id="modalStatus"></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn rounded-0 text-danger" data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
-              title="Detener tarea">
-              <i class="bi bi-stop-circle"></i>
-              <br>
-              <small>Detener</small>
-            </button>
-            <button class="btn"rounded-0  data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
-              title="Iniciar tarea">
-              <i class="bi bi-play-circle"></i>
-              <br>
-              <small>Iniciar</small>
-            </button>
-            <button class="btn"rounded-0  data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
-              title="Finalizar tarea">
-              <i class="bi bi-box-arrow-up"></i>
-              <br>
-              <small>Finalizar</small>
-            </button>
-            <button class="btn"rounded-0  data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
-              title="Modificar tarea">
-              <i class="bi bi-save"></i>
-              <br>
-              <small>Actualizar</small>
-            </button>
+            <div class="modal-footer">
+              <button class="btn rounded-0 text-danger" data-bs-dismiss="modal" data-toggle="tooltip"
+                data-placement="bottom" title="Detener tarea">
+                <i class="bi bi-stop-circle"></i>
+                <br>
+                <small>Detener</small>
+              </button>
+              <button class="btn" rounded-0 data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
+                title="Iniciar tarea">
+                <i class="bi bi-play-circle"></i>
+                <br>
+                <small>Iniciar</small>
+              </button>
+              <button class="btn" rounded-0 data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
+                title="Finalizar tarea">
+                <i class="bi bi-box-arrow-up"></i>
+                <br>
+                <small>Finalizar</small>
+              </button>
+              <button class="btn" rounded-0 data-bs-dismiss="modal" data-toggle="tooltip" data-placement="bottom"
+                title="Modificar tarea">
+                <i class="bi bi-save"></i>
+                <br>
+                <small>Actualizar</small>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal fade" id="modalNuevaTarea" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-      role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content rounded-0">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalTitleId">
-              Crear nueva tarea
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="new-task-form" action="#" method="post">
-              <div class="mb-3">
-                <label for="encargado" class="form-label">Encargado</label>
-                <input class="form-control" name="encargado" id="encargado" />
-              </div>
-              <div class="mb-3">
-                <label for="descriptionTask" class="form-label">Descripción</label>
-                <input class="form-control" name="descriptionTask" id="descriptionTask" />
-              </div>
-              <div class="mb-3">
-                <label for="fecha_fin" class="form-label">Fecha de finalización</label>
-                <input class="form-control" name="fecha_fin" id="fecha_fin" type="date" />
-              </div>
-              <div class="mb-3">
-                <label for="statustask" class="form-label">Status</label>
-                <select class="form-select form-select" name="statustask" id="statustask">
-                  <option value="0">Selecciona un estado...</option>
-                  <option value="not started">No iniciado</option>
-                  <option value="started">Iniciado</option>
-                  <option value="finished">Finalizado</option>
-                </select>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label" for="">Alta</label>
-                <input class="form-check-input" type="checkbox" value="1" id="priorityTask" />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn rounded-0 btn-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button id="save-new-task" type="button" class="btn rounded-0 btn-primary" data-bs-dismiss="modal">Save</button>
+      <div class="modal fade" id="modalNuevaTarea" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+          <div class="modal-content rounded-0">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitleId">
+                Crear nueva tarea
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="new-task-form" action="#" method="post">
+                <div class="mb-3">
+                  <label for="encargado" class="form-label">Encargado</label>
+                  <input class="form-control" name="encargado" id="encargado" />
+                </div>
+                <div class="mb-3">
+                  <label for="descriptionTask" class="form-label">Descripción</label>
+                  <input class="form-control" name="descriptionTask" id="descriptionTask" />
+                </div>
+                <div class="mb-3">
+                  <label for="fecha_fin" class="form-label">Fecha de finalización</label>
+                  <input class="form-control" name="fecha_fin" id="fecha_fin" type="date" />
+                </div>
+                <div class="mb-3">
+                  <label for="statustask" class="form-label">Status</label>
+                  <select class="form-select form-select" name="statustask" id="statustask">
+                    <option value="0">Selecciona un estado...</option>
+                    <option value="not started">No iniciado</option>
+                    <option value="started">Iniciado</option>
+                    <option value="finished">Finalizado</option>
+                  </select>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label" for="">Alta</label>
+                  <input class="form-check-input" type="checkbox" value="1" id="priorityTask" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn rounded-0 btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+              <button id="save-new-task" type="button" class="btn rounded-0 btn-primary"
+                data-bs-dismiss="modal">Save</button>
+            </div>
           </div>
         </div>
       </div>
@@ -186,7 +189,8 @@
     <div class="container">
       <article class="my-4">
         <div class="border rounded p-4 bg-light">
-          <button type="button" class="btn rounded-0 btn-secondary" data-bs-toggle="modal" data-bs-target="#modalNuevaTarea">
+          <button type="button" class="btn rounded-0 btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#modalNuevaTarea">
             + Nueva tarea
           </button>
         </div>
@@ -213,13 +217,11 @@
     </div>
   </main>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-
 <script>
-  var sortable = new Sortable(document.querySelector('#sortable-table tbody'), {
+  /*var sortable = new Sortable(document.querySelector('#sortable-table tbody'), {
     animation: 150,
     ghostClass: 'sortable-ghost',
-  });
+  });*/
 </script>
 
 </html>

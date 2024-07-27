@@ -4,6 +4,7 @@ const TaskManager = {
             this.loadTaskData();
             this.modifyTask();
             this.addTask();
+            this.removeTask();
 
         } catch (error) {
             tbodytasks.innerHTML = error;
@@ -16,8 +17,6 @@ const TaskManager = {
         let tasks = JSON.parse(localStorage.getItem('tasks'));
         let table = document.getElementById('sortable-table');
         let messages = document.getElementById('messages');
-
-        console.log(tasks);
 
         if(tasks == null){
             table.classList.add('d-none');
@@ -43,7 +42,6 @@ const TaskManager = {
                 created_at: row[3],
                 status: row[4]
             };
-            console.log(modalData);
 
             $('#kanmodal').modal('show');
             this.buildModal(modalData);
@@ -138,7 +136,30 @@ const TaskManager = {
 
             this.loadTaskData();
         });
+    },
+
+    removeTask(){
+        let buttons = document.querySelectorAll('button[title="Eliminar tarea"]');
+        let rows = [...document.querySelectorAll('tbody tr')];
+
+        //Este método debe configurarse para obtener la fila por id cuando se aplica sortable
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', function(){
+                let taskList = JSON.parse(localStorage.getItem('tasks'));
+                
+                taskList.splice(index, 1);
+                
+                localStorage.setItem('tasks', JSON.stringify(taskList));
+
+                rows[index].remove();
+            });
+        });
     }
 };
+
+const TaskBuilder = {
+
+};
+
 const a = Object.create(TaskManager);
 export default a;
