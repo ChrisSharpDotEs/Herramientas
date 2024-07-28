@@ -1,10 +1,15 @@
 const TaskManager = {
+    tableColors: {
+        'not started': 'table-danger',
+        'started': 'table-warning',
+        'finished': 'table-success'
+    },
+
     kanban() {
         try {
             this.loadTaskData();
             this.modifyTask();
             this.addTask();
-            this.removeTask();
 
         } catch (error) {
             tbodytasks.innerHTML = error;
@@ -48,13 +53,45 @@ const TaskManager = {
         }));
     },
 
-    buildTrashButton() {
+    buildTrashButton(rowData) {
         let button = document.createElement('button');
-        button.classList.add('btn');
-        [['data-toggle', "tooltip"], ['data-placement', 'bottom'], ['title', 'Eliminar tarea']].forEach(item => button.setAttribute(item[0], item[1]));
         let icon = document.createElement('i');
+        button.classList.add('btn');
+        [['data-toggle', "tooltip"], ['data-placement', 'bottom'], ['title', 'Eliminar tarea']]
+        .forEach(item => button.setAttribute(item[0], item[1]));
+        
         icon.classList.add('bi', 'bi-trash');
         button.appendChild(icon);
+
+        button.addEventListener('click', function(){
+            let rows = [...document.querySelectorAll('tbody tr')];
+            let index = rows.indexOf(rows.find(item => item.getAttribute('data-id') == rowData.code));
+
+            console.log(index);
+
+            let taskList = JSON.parse(localStorage.getItem('tasks'));
+            
+            taskList.splice(index, 1);
+            
+            localStorage.setItem('tasks', JSON.stringify(taskList));
+
+            rows[index].remove();
+        });
+
+        return button;
+    },
+
+    buildEditbutton(rowData){
+        let button = document.createElement('button');
+        let icon = document.createElement('i');
+
+        button.classList.add('btn');
+        button.setAttribute('data-bs-toggle', 'modal');
+        button.setAttribute('data-bs-target', '#kanmodal');
+        icon.classList.add('bi', 'bi-pencil-square');
+
+        button.appendChild(icon);
+
         return button;
     },
 
@@ -67,12 +104,10 @@ const TaskManager = {
 
     buildTaskRow(rowData) {
         let tr = document.createElement('tr');
-        tr.setAttribute('data-status', rowData.status)
-        let tableColors = {
-            'not started': 'table-danger',
-            'started': 'table-warning',
-            'finished': 'table-success'
-        };
+        let td = document.createElement('td');
+
+        tr.setAttribute('data-status', rowData.status);
+        tr.setAttribute('data-id', rowData.code);
 
         Object.keys(rowData).forEach((item, index) => {
             let td = document.createElement('td');
@@ -80,28 +115,26 @@ const TaskManager = {
             if (item == 'nombre') {
                 let img = document.createElement('img');
                 let nombre = document.createElement('span');
-                nombre.appendChild(document.createTextNode(rowData[item]))
+                nombre.appendChild(document.createTextNode(rowData[item]));
+                nombre.classList.add('px-2');
+
                 img.src = 'media/dummyuser.png';
                 img.alt = 'Imagen de usuario';
                 img.classList.add('img-fluid', 'rounded-circle');
                 img.width = '30';
                 td.appendChild(img);
                 td.appendChild(nombre);
-            } else if (item == 'nombre') {
-                ;
             } else {
                 td.appendChild(document.createTextNode(rowData[item]));
             }
             tr.appendChild(td);
         });
-        let td = document.createElement('td');
-        td.innerHTML = '<button class="btn" data-bs-toggle="modal" data-bs-target="#kanmodal">'
-            + '<i class="bi bi-pencil-square"></i>'
-            + '</button>';
-        td.appendChild(this.buildTrashButton());
+        
+        td.appendChild(this.buildEditbutton(rowData))
+        td.appendChild(this.buildTrashButton(rowData));
         tr.appendChild(td);
 
-        [...tr.children].forEach(item => item.classList.add(tableColors[tr.getAttribute('data-status')]));
+        [...tr.children].forEach(item => item.classList.add(this.tableColors[tr.getAttribute('data-status')]));
 
         return tr;
     },
