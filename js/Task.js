@@ -23,10 +23,10 @@ const TaskManager = {
         let table = document.getElementById('sortable-table');
         let messages = document.getElementById('messages');
 
-        if(tasks == null){
+        if(tasks == null || tasks.length == 0){
             table.classList.add('d-none');
             messages.classList.toggle('d-none');
-            messages.append('No hay tareas.')
+            messages.innerHTML = 'No hay tareas.';
         } else {
             messages.classList.toggle('d-none');
             table.classList.remove('d-none');
@@ -54,6 +54,7 @@ const TaskManager = {
     },
 
     buildTrashButton(rowData) {
+        let that = this;
         let button = document.createElement('button');
         let icon = document.createElement('i');
         button.classList.add('btn');
@@ -67,8 +68,6 @@ const TaskManager = {
             let rows = [...document.querySelectorAll('tbody tr')];
             let index = rows.indexOf(rows.find(item => item.getAttribute('data-id') == rowData.code));
 
-            console.log(index);
-
             let taskList = JSON.parse(localStorage.getItem('tasks'));
             
             taskList.splice(index, 1);
@@ -76,6 +75,10 @@ const TaskManager = {
             localStorage.setItem('tasks', JSON.stringify(taskList));
 
             rows[index].remove();
+
+            if(taskList.length == 0){
+                that.loadTaskData();
+            }
         });
 
         return button;
@@ -172,21 +175,7 @@ const TaskManager = {
     },
 
     removeTask(){
-        let buttons = document.querySelectorAll('button[title="Eliminar tarea"]');
-        let rows = [...document.querySelectorAll('tbody tr')];
-
-        //Este método debe configurarse para obtener la fila por id cuando se aplica sortable
-        buttons.forEach((button, index) => {
-            button.addEventListener('click', function(){
-                let taskList = JSON.parse(localStorage.getItem('tasks'));
-                
-                taskList.splice(index, 1);
-                
-                localStorage.setItem('tasks', JSON.stringify(taskList));
-
-                rows[index].remove();
-            });
-        });
+        //TODO
     }
 };
 
