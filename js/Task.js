@@ -5,14 +5,14 @@ const TaskManager = {
         'finished': 'table-success'
     },
 
-    kanban() {
+    init() {
         try {
             this.loadTaskData();
             this.modifyTask();
             this.addTask();
 
         } catch (error) {
-            tbodytasks.innerHTML = error;
+            console.log(error);
         }
 
     },

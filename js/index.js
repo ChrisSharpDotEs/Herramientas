@@ -1,9 +1,17 @@
 import a from "./Task.js";
-import CookieController from "./CookieStteings.js";
+import CookieController from "./CookieSettings.js";
+import { ActiveSwitch } from "./activeSwitch.js";
 
 window.addEventListener('load', function(){
-    let ñ = Object.create(a);
-    ñ.kanban();
-    
-    let cookie = new CookieController();
+    try {
+        let ñ = Object.create(a);
+        ñ.init();
+        let cookie = new CookieController();
+
+        let as = Object.create(ActiveSwitch);
+        as.init();
+        
+    } catch(error) {
+        console.log(error);
+    }
 });
