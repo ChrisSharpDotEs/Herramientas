@@ -69,6 +69,26 @@
         #cookie-settings .modal-content {
             min-height: 35rem;
         }
+
+        .dropzone {
+            min-height: 20rem;
+        }
+
+        .draggable {
+            cursor: grab;
+        }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+        .dragging {
+            opacity: 1;
+        }
+
+        .hide {
+            opacity: 0;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
@@ -361,15 +381,23 @@
     <main>
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 my-2">
                     <div id="return-zone" class="dropzone border p-4 rounded shadow">
                         <div id="drag1" class="draggable p-3 bg-info bg-opacity-10 border border-info rounded"
                             draggable="true">
                             Drag me!
                         </div>
+                        <div id="drag2" class="draggable p-3 bg-info bg-opacity-10 border border-info rounded my-2"
+                            draggable="true">
+                            Drag me too!
+                        </div>
+                        <div id="drag3" class="draggable p-3 bg-info bg-opacity-10 border border-info rounded my-2"
+                            draggable="true">
+                            Drag me too too!
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 my-2">
                     <div id="dropzone" class="dropzone border p-4 rounded shadow">
                         Drop here
                     </div>
@@ -402,40 +430,5 @@
     </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-
-<script>
-    const dragItem = document.getElementById('drag1');
-        const dropZone = document.getElementById('dropzone');
-        const returnZone = document.getElementById('return-zone');
-        const mainContainer = document.getElementById('return-zone');
-
-        dragItem.addEventListener('dragstart', (event) => {
-            event.dataTransfer.setData('text/plain', event.target.id);
-        });
-
-        dropZone.addEventListener('dragover', (event) => {
-            event.preventDefault(); // Allow drop
-        });
-
-        dropZone.addEventListener('drop', (event) => {
-            event.preventDefault();
-            const data = event.dataTransfer.getData('text/plain');
-            const draggedElement = document.getElementById(data);
-            dropZone.appendChild(draggedElement);
-            draggedElement.style.margin = '0'; // Reset margin
-        });
-
-        returnZone.addEventListener('dragover', (event) => {
-            event.preventDefault(); // Allow drop
-        });
-
-        returnZone.addEventListener('drop', (event) => {
-            event.preventDefault();
-            const data = event.dataTransfer.getData('text/plain');
-            const draggedElement = document.getElementById(data);
-            mainContainer.appendChild(draggedElement);
-            draggedElement.style.margin = '10px'; // Reset margin
-        });
-</script>
 
 </html>
