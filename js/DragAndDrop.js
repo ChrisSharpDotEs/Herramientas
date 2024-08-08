@@ -1,4 +1,7 @@
 export class DragAndDrop {
+    containerA;
+    containerB;
+
     constructor(containerAId, containerBId, draggableElement) {
         this.containerA = document.getElementById(containerAId);
         this.containerB = document.getElementById(containerBId);
@@ -33,7 +36,7 @@ export class DragAndDrop {
         setTimeout(() => {
             e.target.classList.add('hide');
         }, 0);
-        
+
         e.target.classList.add('dragging');
     }
 
@@ -52,7 +55,7 @@ export class DragAndDrop {
     handleContainerDrop(e) {
         e.preventDefault();
         const container = e.target;
-        
+
         if (container === this.containerA || container === this.containerB) {
             container.appendChild(this.draggedItem);
         }
@@ -61,5 +64,30 @@ export class DragAndDrop {
     handleDragEnd(e) {
         e.target.classList.remove('dragging');
         e.target.classList.remove('hide');
+    }
+
+    getContainerOrder(containerA, containerB){
+        const containerAOrder = new ContainerOrder(containerA);
+        const containerBOrder = new ContainerOrder(containerB);
+
+        containerAOrder.printOrder();
+        containerBOrder.printOrder();
+    }
+}
+
+
+class ContainerOrder {
+    constructor(container) {
+        this.container = container;
+    }
+
+    getOrder() {
+        const items = Array.from(this.container.querySelectorAll('.draggable'));
+        return items.map(item => item.textContent.trim());
+    }
+
+    printOrder() {
+        const order = this.getOrder();
+        console.log(`Order in ${this.container.id}:`, order);
     }
 }
