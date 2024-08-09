@@ -1,0 +1,15 @@
+{
+    "name": "Cristian Flores",
+    "short_name": "Cristian Flores",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Welcome to my mild portfolio, hope you enjoy it!.",
+    "icons": [],
+    "related_applications": [
+        {
+            "platform": "play",
+            "url": ""
+        }
+    ]
+}

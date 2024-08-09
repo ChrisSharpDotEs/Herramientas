@@ -3,13 +3,16 @@ import CookieController from "./CookieSettings.js";
 import { ActiveSwitch } from "./activeSwitch.js";
 import { DragAndDrop } from "./DragAndDrop.js";
 
+const ongoingTouches = [];
+
 window.addEventListener('load', function () {
     try {
-        if(this.window.location.href.includes('atasks')){
+        if (this.window.location.href.includes('atasks')) {
             let ñ = Object.create(a);
             ñ.init();
             let cookie = new CookieController();
-        }else if(this.window.location.href.includes('adragdrop')){
+        } else if (this.window.location.href.includes('adragdrop')) {
+            
             let drag = new DragAndDrop('return-zone', 'dropzone', '.draggable');
             buttonget.addEventListener('click', function () {
                 drag.getContainerOrder(drag.containerA, drag.containerB)
